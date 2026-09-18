@@ -1,0 +1,27 @@
+﻿Colname,Coltype,Convert,Strong_benign,Moderate_benign,Supporting_benign,VUS,Supporting_pathogenic,Moderate_pathogenic,Strong_pathogenic,Calibration_accuracy,Note
+ESM1b_score,Insilico_predictor,-1,,6.44,8.24,,10.7,13,,0.786,Newly added in 2025.
+PHACTboost_score,Insilico_predictor,1,0.288,0.773,,,0.981,0.997,1,0.831,Newly added in 2025.
+gMVP_score,Insilico_predictor,1,0.305,0.594,0.678,,0.835,0.887,0.987,0.835,Newly added in 2025.
+VARITY_R_score,Insilico_predictor,1,0.0915,0.307,0.424,,0.708,0.875,0.967,0.828,Newly added in 2025.
+ClinPred_score,Insilico_predictor,1,0.138,0.603,0.827,,0.952,0.981,0.998,0.884,Newly added in 2025.
+AlphaMissense_score,Insilico_predictor,1,0.097,0.137,0.3,,0.621,0.926,0.992,0.82,Newly added in 2025.
+MutationTaster_score,Insilico_predictor,1,0.15,0.3,0.43,,0.67,0.79,0.95,0.899,
+MutationAssessor_score,Insilico_predictor,1,-0.69,1.24,1.99,,2.8,3.36,4.43,0.809,
+MetaRNN_score,Insilico_predictor,1,0.108,0.267,0.43,,0.748,0.841,0.939,0.91,
+REVEL_score,Insilico_predictor,1,0.133,0.351,0.471,,0.685,0.798,0.946,0.826,
+DEOGEN2_score,Insilico_predictor,1,0.0518,0.254,0.397,,0.761,0.83,0.956,0.749,
+BayesDel_noAF_score,Insilico_predictor,1,-0.476,-0.204,-0.0404,,0.133,0.303,0.521,0.848,
+CADD_phred,Insilico_predictor,1,16.1,22,23.2,,25.6,28.8,33,0.843,
+Eigen-raw_coding,Insilico_predictor,1,-0.694,-0.0295,0.189,,0.683,0.861,1.04,0.727,
+phyloP100way_vertebrate,Conservation_predictor,1,-1.04,1.08,3.58,,7.52,9.88,,0.618,
+phastCons100way_vertebrate,Conservation_predictor,1,0,0.795,0.997,,,,,0.747,
+dbscSNV_ADA_SCORE,Splicing_predictor,1,,,,,0.9578,0.9993,0.9999,0.966,Only for SNVs. Scores were set up from Varsome. Digits = 4.
+dbscSNV_RF_SCORE,Splicing_predictor,1,,,,,0.584,0.832,0.994,0.973,Only for SNVs. Scores were set up from Varsome. Digits = 3.
+SpliceAI-acc-gain,Splicing_predictor,1,,,,,0.2,0.5,0.8,,Masked score. Scores were set up from UCSC.
+SpliceAI-acc-loss,Splicing_predictor,1,,,,,0.2,0.5,0.8,,Masked score. Scores were set up from UCSC.
+SpliceAI-don-gain,Splicing_predictor,1,,,,,0.2,0.5,0.8,,Masked score. Scores were set up from UCSC.
+SpliceAI-don-loss,Splicing_predictor,1,,,,,0.2,0.5,0.8,,Masked score. Scores were set up from UCSC.
+SpliceAI-indel-acc-gain,Splicing_predictor,1,,,,,0.2,0.5,0.8,,Masked score. Scores were set up from UCSC.
+SpliceAI-indel-acc-loss,Splicing_predictor,1,,,,,0.2,0.5,0.8,,Masked score. Scores were set up from UCSC.
+SpliceAI-indel-don-gain,Splicing_predictor,1,,,,,0.2,0.5,0.8,,Masked score. Scores were set up from UCSC.
+SpliceAI-indel-don-loss,Splicing_predictor,1,,,,,0.2,0.5,0.8,,Masked score. Scores were set up from UCSC.
