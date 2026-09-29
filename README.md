@@ -1,5 +1,5 @@
 # VSS: Variant Scoring System
-VSS is an integrated Variant Scoring System for automated pathogenic variant prioritization. VSS scores ranging from −2 to 13, with higher scores indicating greater pathogenic potential. Score cutoffs of 3–6 represented the most favorable operating range for prioritizing variants with pathogenic potential.
+VSS is an integrated Variant Scoring System for automated pathogenic variant prioritization. VSS scores ranging from −2 to 13, with higher scores indicating greater pathogenic potential. Score cutoffs of 3–6 represented the most favorable operating range for prioritizing variants with pathogenic potential. For categorical interpretation, scores ≥6 are recommended to correspond to pathogenic/likely pathogenic (P/LP), scores of 2–5 to variants of uncertain significance (VUS), and scores ≤1 to benign/likely benign (B/LB).
 
 ## Annotation resources
 
