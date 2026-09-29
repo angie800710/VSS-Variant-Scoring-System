@@ -10,6 +10,18 @@ Because the complete set of annotation databases used by VSS can require up to a
 
 We recommend using the curated VSS annotation resources before running the VSS pipeline, as the workflow expects specific annotation fields and column names. Differences in database versions, annotation configurations, or column naming may affect compatibility with the pipeline.
 
+**VSS currently uses the following annotation databases and resources**
+- **CADD** — Combined Annotation Dependent Depletion, v1.7 (February 2024)
+- **dbscSNV** — Database of Splicing Consensus Single-Nucleotide Variants, v1.1 (December 2015)
+- **gnomAD** — Genome Aggregation Database, v4.1 (March 2024)
+- **RefSeq Gene (refGene)** — RefSeq gene annotation (August 2022)
+- **ClinVar** — Database of clinical significance of variants (June 2025)
+- **dbNSFP** — Functional prediction and annotation database for nonsynonymous single-nucleotide variants, v5.1a (March 2025)
+- **Ensembl Gene (ensGene)** — Ensembl gene annotation based on GENCODE v46 (October 2024)
+- **SpliceAI** — Deep learning–based splice variant prediction resource, v1.3 (October 2019)
+- **Taiwanese MAF** — Minor allele frequency database derived from the Taiwan Biobank (July 2023)
+- **dbSNP** — NCBI database of genetic variation, build 156 (July 2023)
+
 ## VSS implementation
 VSS is implemented in R and executed through an automated command-line interface. The input is the ANNOVAR-annotated vcf, and the VSS workflow is executed using the following command: ```Rscript VSS.R --data <annotated_vcf> --ref <reference_directory> --output <output_directory> ```. The reference directory is provided in this repository and contains the required ```Used_columns_scores.csv``` file for in-silico predictor standardization. Two additional reference files, ```Gene_panel_coordinates.csv``` and ```Common_variants_after_mask.csv```, are optional and may be used for user-defined gene panel filtering and variant masking, respectively.
 
