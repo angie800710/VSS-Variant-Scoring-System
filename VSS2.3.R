@@ -2,7 +2,6 @@
 library(dplyr)
 library(tidyr)
 library(magrittr)
-library(ggplot2)
 library(furrr)
 library(purrr)
 library(stringr)
@@ -22,7 +21,7 @@ option_list <- list(
   make_option(c("--output"), type = "character", help = "File path to the output results"),
   make_option(c("--DP"), type = "double", default = 10, help = "Depth cutoff [default %default]", metavar = "Integer"),
   make_option(c("--AF"), type = "double", default = 0.05, help = "Rounded population allele frequency cutoff [default %default]", metavar = "Numerical"),
-  make_option(c("--VSS2"), type = "double", default = 5, help = "VSS2 cutoff [default %default]", metavar = "Integer -2~13"),
+  make_option(c("--VSS2"), type = "double", default = 6, help = "VSS2 cutoff [default %default]", metavar = "Integer -2~13"),
   make_option(c("--QUAL_filter"), action = "store_true", default = FALSE, help = "QUAL filters (QD,SB,ReadPos) are on [default %default]"),
   make_option(c("--BA1_restore"), action = "store_true", default = FALSE, help = "BA1 variants are included [default %default]"),
   make_option(c("--phenotype"), type = "character", help = "Phenotype filter (comma-separated, no space)", metavar = "Phenotype keywords")
@@ -79,7 +78,7 @@ if (is.null(AF_cutoff)) {
 }
 
 if (is.null(VSS2_cutoff)) {
-  cat("VSS2 cutoff:", 5, "\n")
+  cat("VSS2 cutoff:", 6, "\n")
 } else {
   cat("VSS2 cutoff:", VSS2_cutoff, "\n")
 }
@@ -1133,7 +1132,7 @@ tryCatch({
   customized_filter <- function(df, 
                                 DP_cutoff = 10, 
                                 AF_cutoff = 0.05, 
-                                VSS2_cutoff = 5, 
+                                VSS2_cutoff = 6, 
                                 BA1 = TRUE, 
                                 phenotype = NULL,
                                 QUAL_filter = FALSE) {
@@ -1207,9 +1206,9 @@ tryCatch({
                                         ACMG = paste(ACMG_AF, ACMG_MutType, ACMG_Splicing, ACMG_InterProDomain, ACMG_Predictors, sep = ":"),
                                         VSS2_classification = case_when(
                                           VSS2_score >= 10 ~ "Pathogenic",
-                                          VSS2_score >= 5 & VSS2_score <= 9 ~ "Likely pathogenic",
-                                          VSS2_score >= 0 & VSS2_score <= 4 ~ "VUS",
-                                          VSS2_score < 0 ~ "Benign"),
+                                          VSS2_score >= 6 & VSS2_score <= 9 ~ "Likely pathogenic",
+                                          VSS2_score >= 2 & VSS2_score <= 5 ~ "VUS",
+                                          VSS2_score <= 1 ~ "Benign"),
                                         VSS2_version = "v2.3" #Change this to correpsonding version
                                       ))
   
@@ -1218,9 +1217,9 @@ tryCatch({
                                    ACMG = paste(ACMG_AF, ACMG_MutType, ACMG_Splicing, ACMG_InterProDomain, ACMG_Predictors, sep = ":"),
                                    VSS2_classification = case_when(
                                      VSS2_score >= 10 ~ "Pathogenic",
-                                     VSS2_score >= 5 & VSS2_score <= 9 ~ "Likely pathogenic",
-                                     VSS2_score >= 0 & VSS2_score <= 4 ~ "VUS",
-                                     VSS2_score < 0 ~ "Benign"),
+                                     VSS2_score >= 6 & VSS2_score <= 9 ~ "Likely pathogenic",
+                                     VSS2_score >= 2 & VSS2_score <= 5 ~ "VUS",
+                                     VSS2_score <= 1 ~ "Benign"),
                                    VSS2_version = "v2.3" #Change this to correpsonding version
                                  ))
   
