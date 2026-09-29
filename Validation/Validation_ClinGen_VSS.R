@@ -18,7 +18,6 @@ library(purrr)
 library(tibble)
 library(caret)
 
-setwd("C:/Users/User1/OneDrive/桌面/VSS2_R/Revision")
 
 ### Import and merge data ###
 VSS <- read.csv("VSS2_ClinGen.csv", header = T)
