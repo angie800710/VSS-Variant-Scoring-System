@@ -61,6 +61,6 @@ install.packages(c("dplyr","tidyr","magrittr","furrr","purrr","stringr","reshape
 ## Publication
 For detailed information, please refer to the following paper.
 VSS: An Integrated Variant Scoring System for Automated Pathogenic Variant Prioritization.
-Ying-An Chen<sup>1,2*</sup>, Yen-An Tang<sup>1,2</sup>, Chiao-May Chang<sup>2</sup>, and H. Sunny Sun<sup>1,2*</sup>
+Ying-An Chen, Yen-An Tang, Chiao-May Chang, and H. Sunny Sun
 
 
