@@ -25,7 +25,7 @@ We recommend using the curated VSS annotation resources before running the VSS p
 ## VSS implementation
 VSS is implemented in R and executed through an automated command-line interface. The input is the ANNOVAR-annotated vcf, and the VSS workflow is executed using the following command: ```Rscript VSS.R --data <annotated_vcf> --ref <reference_directory> --output <output_directory> ```. The reference directory is provided in this repository and contains the required ```Used_columns_scores.csv``` file for in-silico predictor standardization. Two additional reference files, ```Gene_panel_coordinates.csv``` and ```Common_variants_after_mask.csv```, are optional and may be used for user-defined gene panel filtering and variant masking, respectively.
 
-## Parameters
+## VSS parameters
 The following parameters are available for user-defined filtering:
 
 | Parameter | Description | Default |
@@ -39,7 +39,7 @@ The following parameters are available for user-defined filtering:
 
 \* VSS supports partial matching of phenotype descriptions specified using the `--phenotype` option. Multiple phenotype terms are separated by commas, with underscores used in place of spaces within each term. Matched HPO terms are reported in `Phenotype_match`, and the number of matched terms is recorded in `Phenotype_hit`.
 
-## Outputs
+## VSS outputs
 The VSS pipeline generates three output tables for each analyzed sample, together with an R workspace file:
 
 | Output file | Description |
