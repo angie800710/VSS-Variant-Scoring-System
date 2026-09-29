@@ -23,7 +23,9 @@ We recommend using the curated VSS annotation resources before running the VSS p
 - **dbSNP** — NCBI database of genetic variation, build 156 (July 2023)
 
 ## VSS implementation
-VSS is implemented in R and executed through an automated command-line interface. The input is the ANNOVAR-annotated vcf, and the VSS workflow is executed using the following command: ```Rscript VSS.R --data <annotated_vcf> --ref <reference_directory> --output <output_directory> ```. The reference directory is provided in this repository and contains the required ```Used_columns_scores.csv``` file for in-silico predictor standardization. Two additional reference files, ```Gene_panel_coordinates.csv``` and ```Common_variants_after_mask.csv```, are optional and may be used for user-defined gene panel filtering and variant masking, respectively.
+VSS is implemented in R and executed through an automated command-line interface. The input is the ANNOVAR-annotated vcf, and the VSS workflow is executed using the following command: ```bash
+Rscript VSS.R --data <annotated_vcf> --ref <reference_directory> --output <output_directory>
+```. The reference directory is provided in this repository and contains the required ```Used_columns_scores.csv``` file for in-silico predictor standardization. Two additional reference files, ```Gene_panel_coordinates.csv``` and ```Common_variants_after_mask.csv```, are optional and may be used for user-defined gene panel filtering and variant masking, respectively.
 
 ## VSS parameters
 The following parameters are available for user-defined filtering:
