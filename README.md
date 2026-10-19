@@ -40,6 +40,7 @@ The following parameters are available for user-defined filtering:
 | --phenotype | Phenotype keyword filtering using comma-separated terms.# | None |
 
 \* To avoid missing potentially pathogenic variants, you can lower the VSS score threshold to 3 and use the CLNSIG column to further prioritize variants labeled as pathogenic or likely pathogenic.
+
 \# VSS supports partial matching of phenotype descriptions specified using the `--phenotype` option. Multiple phenotype terms are separated by commas, with underscores used in place of spaces within each term. Matched HPO terms are reported in `Phenotype_match`, and the number of matched terms is recorded in `Phenotype_hit`.
 
 ## VSS outputs
