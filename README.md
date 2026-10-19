@@ -37,7 +37,7 @@ The following parameters are available for user-defined filtering:
 | --VSS | VSS score threshold for variant prioritization* | 6 |
 | --QUAL_filter | Enable additional quality filters based on quality depth, strand bias, and read-position bias | Enabled |
 | --BA1_restore | Restore variants classified as BA1 (stand-alone benign evidence) | Disabled |
-| --phenotype | Phenotype keyword filtering using comma-separated terms.# | None |
+| --phenotype | Phenotype keyword filtering using comma-separated terms# | None |
 
 \* To avoid missing potentially pathogenic variants, you can lower the VSS score threshold to 3 and use the CLNSIG column to further prioritize variants labeled as pathogenic or likely pathogenic.
 
