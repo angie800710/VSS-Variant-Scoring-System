@@ -6,7 +6,7 @@ VSS is an integrated Variant Scoring System for automated pathogenic variant pri
 VSS integrates multiple annotation sources through ANNOVAR. Users should first download and install ANNOVAR from:
 https://www.openbioinformatics.org/annovar/annovar_download_form.php
 
-Because the complete set of annotation databases used by VSS can require up to approximately 1 TB of storage, these resources are not hosted directly in this GitHub repository. Users who wish to access the curated annotation resources and configurations used by VSS may contact em61330@ncku.edu.tw to obtain the download link.
+Because the complete set of annotation databases used by VSS can require up to approximately 1 TB of storage, these resources are not hosted directly in this GitHub repository. Users who wish to access the curated annotation resources and configurations used by VSS may email em61330@ncku.edu.tw to obtain the download link.
 
 We recommend using the curated VSS annotation resources before running the VSS pipeline, as the workflow expects specific annotation fields and column names. Differences in database versions, annotation configurations, or column naming may affect compatibility with the pipeline.
 
@@ -34,12 +34,13 @@ The following parameters are available for user-defined filtering:
 |---|---|---|
 | --DP | Minimum sequencing depth (DP) required for variant retention | 10 |
 | --AF | Minor allele frequency (MAF) threshold | 0.05 |
-| --VSS | VSS score threshold for variant prioritization | 6 |
+| --VSS | VSS score threshold for variant prioritization* | 6 |
 | --QUAL_filter | Enable additional quality filters based on quality depth, strand bias, and read-position bias | Enabled |
 | --BA1_restore | Restore variants classified as BA1 (stand-alone benign evidence) | Disabled |
-| --phenotype | Phenotype keyword filtering using comma-separated terms.* | None |
+| --phenotype | Phenotype keyword filtering using comma-separated terms.# | None |
 
-\* VSS supports partial matching of phenotype descriptions specified using the `--phenotype` option. Multiple phenotype terms are separated by commas, with underscores used in place of spaces within each term. Matched HPO terms are reported in `Phenotype_match`, and the number of matched terms is recorded in `Phenotype_hit`.
+\* To avoid missing potentially pathogenic variants, you can lower the VSS score threshold to 3 and use the CLNSIG column to further prioritize variants labeled as pathogenic or likely pathogenic.
+\# VSS supports partial matching of phenotype descriptions specified using the `--phenotype` option. Multiple phenotype terms are separated by commas, with underscores used in place of spaces within each term. Matched HPO terms are reported in `Phenotype_match`, and the number of matched terms is recorded in `Phenotype_hit`.
 
 ## VSS outputs
 The VSS pipeline generates three output tables for each analyzed sample, together with an R workspace file:
