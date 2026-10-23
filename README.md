@@ -76,6 +76,14 @@ The required packages can be installed in R using:
 install.packages(c("dplyr","tidyr","magrittr","furrr","purrr","stringr","reshape2","optparse","stringi","data.table","vcfR"))
 ```
 
+## Test run
+1. git clone
+2. cd VSS-Variant-Scoring-System
+3. Unzip the test file: ```gzip -dc Test_example/NA11316_hg19_multianno.vcf.gz.gz | gzip -dc > NA11316_hg19_multianno.vcf```
+4. Set up a output directory: ```mkdir VSS_results```
+5. Run VSS: Rscript VSS.R --data Test_example/NA11316_hg19_multianno.vcf --ref reference --output VSS_results
+
+
 ## Publication
 For detailed information, please refer to the following paper.
 VSS: An Integrated Variant Scoring System for Automated Pathogenic Variant Prioritization.
