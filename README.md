@@ -79,7 +79,7 @@ install.packages(c("dplyr","tidyr","magrittr","furrr","purrr","stringr","reshape
 ## Test run
 1. ```git clone https://github.com/angie800710/VSS-Variant-Scoring-System```
 2. ```cd VSS-Variant-Scoring-System```
-3. Unzip the test file: ```gzip -dc Test_example/NA11316_hg19_multianno.vcf.gz.gz | gzip -dc > NA11316_hg19_multianno.vcf```
+3. Unzip the test file: 
 4. Set up a output directory: ```mkdir VSS_results```
 5. Run VSS: ```Rscript VSS.R --data Test_example/NA11316_hg19_multianno.vcf --ref reference --output VSS_results```
 
