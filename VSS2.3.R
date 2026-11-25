@@ -23,7 +23,7 @@ option_list <- list(
   make_option(c("--DP"), type = "double", default = 10, help = "Depth cutoff [default %default]", metavar = "Integer"),
   make_option(c("--AF"), type = "double", default = 0.2, help = "Allele frequency cutoff [default %default]", metavar = "Numerical"),
   make_option(c("--POP_AF"), type = "double", default = 0.05, help = "Rounded population allele frequency cutoff [default %default]", metavar = "Numerical"),
-  make_option(c("--VSS2"), type = "double", default = 5, help = "VSS2 cutoff [default %default]", metavar = "Integer -2~13"),
+  make_option(c("--VSS"), type = "double", default = 6, help = "VSS cutoff [default %default]", metavar = "Integer -2~13"),
   make_option(c("--QUAL_filter"), action = "store_true", default = FALSE, help = "Turn on QUAL filters (QD,SB,ReadPos) [default %default]"),
   make_option(c("--BA1_restore"), action = "store_true", default = FALSE, help = "Retain BA1 variants [default %default]"),
   make_option(c("--phenotype"), type = "character", help = "Phenotype filter (comma-separated, no space)", metavar = "Phenotype keywords")
@@ -53,7 +53,7 @@ output_path <- args$output
 DP_cutoff <- args$DP
 AF_cutoff <- args$AF
 POP_AF_cutoff <- args$POP_AF
-VSS2_cutoff <- args$VSS2
+VSS_cutoff <- args$VSS
 QUAL_filter <- args$QUAL_filter  # TRUE if --QUAL_filter is provided
 BA1_restore <- args$BA1_restore  # TRUE if --BA1_restore is provided
 phenotype <- if (!is.null(args$phenotype)) {
@@ -86,10 +86,10 @@ if (is.null(POP_AF_cutoff)) {
   cat("Rounded POP_AF cutoff:", POP_AF_cutoff, "\n")
 }
 
-if (is.null(VSS2_cutoff)) {
-  cat("VSS2 cutoff:", 5, "\n")
+if (is.null(VSS_cutoff)) {
+  cat("VSS cutoff:", 5, "\n")
 } else {
-  cat("VSS2 cutoff:", VSS2_cutoff, "\n")
+  cat("VSS cutoff:", VSS_cutoff, "\n")
 }
 
 if (!is.null(phenotype)) {
@@ -1118,7 +1118,7 @@ tryCatch({
   
   #####----------Step6. Calculate final VSS2 score and make interpretation (BA1 not counted)---------- 
   
-  calculate_VSS2 <- function(df) {
+  calculate_VSS <- function(df) {
     # 權重定義
     weights <- c("PVS" = 8, "PS" = 4, "PM" = 2, "PP" = 1, "BP" = -1)
     
@@ -1197,7 +1197,7 @@ tryCatch({
     
     df <- df %>%
       mutate(
-        VSS2_score = ifelse(all_acmg_na | (acmg_af_ba1 & all_other_acmg_na), NA,
+        VSS_score = ifelse(all_acmg_na | (acmg_af_ba1 & all_other_acmg_na), NA,
                             other_weights_sum + acmg_weighted$weighted_Mut_Splice),
         PVS_count = count_acmg$PVS_count,
         PS_count  = count_acmg$PS_count,
@@ -1212,7 +1212,7 @@ tryCatch({
   
   # Apply the function to each dataframe in the list
   plan(multisession)
-  data_final_all <- future_map(final_data_list, calculate_VSS2)
+  data_final_all <- future_map(final_data_list, calculate_VSS)
   
   
   #####---------Step 7. Customized filtering--------------
@@ -1344,7 +1344,7 @@ tryCatch({
     DP_cutoff = 10,
     AF_cutoff = 0.2,
     POP_AF_cutoff = 0.05,
-    VSS2_cutoff = 5,
+    VSS_cutoff = 6,
     BA1 = TRUE,
     phenotype = NULL,
     QUAL_filter = FALSE
@@ -1370,7 +1370,7 @@ tryCatch({
     
     # 3. VSS2 score filtering
     df <- df %>%
-      filter(VSS2_score >= .env$VSS2_cutoff)
+      filter(VSS_score >= .env$VSS_cutoff)
     
     # 4. BA1 filtering
     if (!BA1) {
@@ -1410,7 +1410,7 @@ tryCatch({
         DP_cutoff = DP_cutoff,
         AF_cutoff = AF_cutoff,
         POP_AF_cutoff = POP_AF_cutoff,
-        VSS2_cutoff = VSS2_cutoff,
+        VSS_cutoff = VSS_cutoff,
         BA1 = BA1_restore,
         QUAL_filter = QUAL_filter,
         phenotype = phenotype
@@ -1486,23 +1486,23 @@ tryCatch({
   data_final_filtered <- future_map(data_final_filtered, ~ .x %>%
                                       mutate(
                                         ACMG = paste(ACMG_AF, ACMG_MutType, ACMG_Splicing, ACMG_InterProDomain, ACMG_Predictors, sep = ":"),
-                                        VSS2_classification = case_when(
-                                          VSS2_score >= 10 ~ "Pathogenic",
-                                          VSS2_score >= 6 & VSS2_score <= 9 ~ "Likely pathogenic",
-                                          VSS2_score >= 2 & VSS2_score <= 5 ~ "VUS",
-                                          VSS2_score <= 1 ~ "Benign"),
-                                        VSS2_version = "v2.3" #Change this to correpsonding version
+                                        VSS_classification = case_when(
+                                          VSS_score >= 10 ~ "Pathogenic",
+                                          VSS_score >= 6 & VSS_score <= 9 ~ "Likely pathogenic",
+                                          VSS_score >= 2 & VSS_score <= 5 ~ "VUS",
+                                          VSS_score <= 1 ~ "Benign"),
+                                        VSS_version = "v2.3" #Change this to correpsonding version
                                       ))
   
   data_final_all <- future_map(data_final_all, ~ .x %>%
                                  mutate(
                                    ACMG = paste(ACMG_AF, ACMG_MutType, ACMG_Splicing, ACMG_InterProDomain, ACMG_Predictors, sep = ":"),
-                                   VSS2_classification = case_when(
-                                     VSS2_score >= 10 ~ "Pathogenic",
-                                     VSS2_score >= 6 & VSS2_score <= 9 ~ "Likely pathogenic",
-                                     VSS2_score >= 2 & VSS2_score <= 5 ~ "VUS",
-                                     VSS2_score <= 1 ~ "Benign"),
-                                   VSS2_version = "v2.3" #Change this to correpsonding version
+                                   VSS_classification = case_when(
+                                     VSS_score >= 10 ~ "Pathogenic",
+                                     VSS_score >= 6 & VSS_score <= 9 ~ "Likely pathogenic",
+                                     VSS_score >= 2 & VSS_score <= 5 ~ "VUS",
+                                     VSS_score <= 1 ~ "Benign"),
+                                   VSS_version = "v2.3" #Change this to correpsonding version
                                  ))
   
   
@@ -1584,7 +1584,7 @@ tryCatch({
     
     write.table(
       df_clean,
-      file = file.path(output_path, paste0("VSS2_filter_", file_name, ".table")),
+      file = file.path(output_path, paste0("VSS_filter_", file_name, ".table")),
       sep = "\t",
       row.names = FALSE,
       col.names = TRUE,
